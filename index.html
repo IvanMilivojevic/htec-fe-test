@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HTEC Javascript</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div id="app-wrapper">
+	<div class="search-container">
+		<form method="post" id="search-form">
+			<input type="text" name="search-box" id="search-box" />
+			<button type="submit"><span>Submit</span></button>
+		</form>
+	</div>
+
+	<div id="cars-container"></div>
+
+	<div id="track-container">
+		<div id="car-start"></div>
+		<div id="race-field"></div>
+	</div>
+
+	<div class="buttons-controls">
+		<input type="text" id="anim-speed" name="anim-speed" placeholder="Animation Speed" />
+		<button id="start-button" disabled="disabled">START RACE</button>
+	</div>
+</div>
+
+<script src="js/custom.js"></script>
+</body>
+</html>

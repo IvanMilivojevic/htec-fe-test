@@ -1,0 +1,325 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+body {
+	background-color: #ccc;
+}
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+#app-wrapper {
+	width: 1140px;
+	padding: 0 20px 100px;
+	max-width: 100%;
+	margin: 50px auto;
+}
+#search-form {
+	display: flex;
+	position: relative;
+	margin-bottom: 50px;
+}
+#search-form input {
+	flex-grow: 1;
+	height: 40px;
+	border-radius: 10px;
+	border: 2px solid #000;
+	padding: 10px 90px 10px 20px;
+	font-size: 18px;
+	outline: none;
+	transition: border 0.5s ease;
+}
+#search-form input:focus {
+	border-color: red;
+}
+#search-form button {
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	bottom: 2px;
+	border: 0;
+	border-radius: 0 8px 8px 0;
+	background: #000;
+	padding: 0 10px;
+	color: #fff;
+	text-transform: uppercase;
+}
+#cars-container {
+	display: flex;
+	flex-wrap: wrap;
+	position: relative;
+}
+#cars-container:after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 2px;
+	background-color: #ccc;
+}
+.car-card-wrapper {
+	width: 33.33%;
+	padding: 30px;
+	border-right: 2px solid #000;
+	border-bottom: 2px solid #000;
+}
+.car-card-wrapper:nth-child(3n+3) {
+	border-right: 0;
+}
+.car-card {
+	position: relative;
+	text-align: center;
+	cursor: pointer;
+	height: 100%;
+}
+.car-card-front {
+	position: relative;
+	height: 100%;
+	padding: 15px 5px 40px;
+	background-color: #fff;
+	display: flex;
+	align-items: center;
+	border: 2px solid #000;
+	border-radius: 10px;
+	overflow: hidden;
+	transform: perspective(1000px) rotateY(0deg);
+	backface-visibility: hidden;
+	transition: transform 0.5s linear;
+}
+.car-card:hover .car-card-front,
+.car-card.active-card .car-card-front {
+	transform: perspective(1000px) rotateY(-180deg);
+}
+.car-card-name {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	font-size: 20px;
+	line-height: 40px;
+	background-color: #000;
+	color: #fff;
+}
+.car-card-back {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding: 15px 5px 40px;
+	display: flex;
+	align-items: center;
+	border: 2px solid #000;
+	border-radius: 10px;
+	transform: perspective(1000px) rotateY(180deg);
+	backface-visibility: hidden;
+	transition: transform 0.5s linear;
+}
+.car-card:hover .car-card-back,
+.car-card.active-card .car-card-back {
+	transform: perspective(1000px) rotateY(0deg);
+}
+.car-card-back img {
+	transform: scaleX(-1);
+}
+.car-card-info {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	padding: 0 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background-color: rgba(0,0,0,0.5);
+	color: #fff;
+	font-size: 20px;
+}
+.car-card-speed {
+	margin-top: 10px;
+}
+#track-container {
+	position: relative;
+	margin-top: 60px;
+	margin-bottom: 125px;
+	width: 100%;
+	height: 300px;
+	border: 2px solid #000;
+	border-radius: 10px;
+	display: flex;
+	background: #ddd;
+}
+#car-start {
+	height: 100%;
+	width: calc(100% / 11);
+	position: relative;
+	z-index: 12;
+}
+.car-holder {
+	position: relative;
+	left: 0;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	transition-property: left;
+	transition-timing-function: linear;
+}
+.car-holder img {
+	transform: scaleX(-1);
+	border: 1px solid #000;
+	border-radius: 5px;
+	max-width: 90%;
+	background: #fff;
+}
+.car-holder.first-place img {
+	border-color: gold;
+}
+.car-holder.second-place img {
+	border-color: silver;
+}
+.car-holder.third-place img {
+	border-color: brown;
+}
+.car-holder.no-podium img {
+	border-color: green;
+}
+#race-field {
+	height: 100%;
+	width: calc((100% / 11) * 10);
+	position: relative;
+	display: flex;
+}
+.race-track {
+	position: absolute;
+	left: 0;
+	width: 100%;
+	border-bottom: 1px solid #000;
+}
+.race-track:last-child {
+	border-bottom: 0;
+}
+.race-period {
+	height: 100%;
+	position: relative;
+	border-left: 1px solid #aaa;
+}
+.race-period:first-child {
+	border-color: red;
+}
+.race-period:after {
+	content: attr(data-period-value);
+	position: absolute;
+	bottom: 100%;
+	right: 0;
+	transform: translate(50%, -30%);
+	font-size: 16px;
+	text-align: center;
+}
+.race-period:first-of-type:before {
+	content: "";
+	position: absolute;
+	bottom: 100%;
+	left: 0;
+	width: 40px;
+	height: 20px;
+	background-image: url(../images/finish-flag.png);
+	background-size: 100%;
+	transform: translate(-50%, -5px);
+}
+.race-period:last-of-type:after {
+	content: "";
+	width: 40px;
+	height: 20px;
+	background-image: url(../images/finish-flag.png);
+	background-size: 100%;
+	transform: translate(50%, -5px);
+}
+.sign-period,
+.traffic-period {
+	position: absolute;
+	top: -25px;
+	bottom: -25px;
+	border-right: 1px dashed #000;
+}
+.sign-period:before {
+	content: attr(data-sign-value);
+	position: absolute;
+	top: 100%;
+	right: 0;
+	width: 50px;
+	height: 50px;
+	border: 3px solid #ff3e3e;
+	border-radius: 50%;
+	background: #fff;
+	color: #000;
+	font-size: 26px;
+	text-align: center;
+	line-height: 44px;
+	transform: translate(50%, 5px);
+}
+.traffic-light {
+	position: absolute;
+	top: 100%;
+	right: 0;
+	width: 40px;
+	height: 80px;
+	border: 2px solid #000;
+	border-radius: 5px;
+	background: #fff;
+	transform: translate(50%, 5px);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.traffic-light:before,
+.traffic-light:after {
+	content: "";
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background: transparent;
+	display: inline-block;
+	margin: 3px 0;
+}
+.traffic-light:after {
+	background: green;
+}
+.traffic-light.stop:after {
+	background: transparent;
+}
+.traffic-light.stop:before {
+	background: red;
+}
+.buttons-controls {
+	display: flex;
+	justify-content: flex-end;
+}
+#anim-speed {
+	height: 40px;
+	padding: 10px 15px;
+	outline: none;
+	font-size: 16px;
+	max-width: 200px;
+}
+#start-button {
+	background-color: green;
+	color: #fff;
+	border: 0;
+	box-shadow: none;
+	padding: 0 10px;
+	cursor: pointer;
+}
+#start-button[disabled] {
+	cursor: not-allowed;
+	background: #aaa;
+	opacity: 0.9;
+	color: #000;
+}
